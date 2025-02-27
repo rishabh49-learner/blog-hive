@@ -11,7 +11,7 @@ const Navbar = () => {
 
   const user = useSelector((state) => state.auth.user);
   const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
-  const status = useSelector((state) => state.auth.status);
+ //const status = useSelector((state) => state.auth.status);
 
   const closeMenu = () => {
     setIsMenuActive(false);
