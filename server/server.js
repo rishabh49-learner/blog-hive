@@ -21,7 +21,8 @@ app.use("/api/upload", require("./routes/imageRoutes"));
 
 app.use(errorHandler);
 
-app.listen(port, () => {
-  swaggerDocs(app, port);
-  console.log(`Server started running on port ${port}`);
-});
+// app.listen(port, () => {
+//   swaggerDocs(app, port);
+//   console.log(`Server started running on port ${port}`);
+// });
+module.exports = app;
