@@ -11,18 +11,26 @@ connectDB();
 
 const app = express();
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+// Routes
 app.use("/api/blogs", require("./routes/blogsRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/upload", require("./routes/imageRoutes"));
 
+// Serve frontend (for full-stack deployment)
+const path = require("path");
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+
+  app.get("*", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
+  });
+}
+
 app.use(errorHandler);
 
-// app.listen(port, () => {
-//   swaggerDocs(app, port);
-//   console.log(`Server started running on port ${port}`);
-// });
 module.exports = app;
