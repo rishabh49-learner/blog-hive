@@ -4,7 +4,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "vercel-build": "cd ../client && npm install && npm run build) || (cd ./client && npm install && npm run build",
+    "vercel-build": "cd ../client && npm install && npm run build) ",
     "server": "nodemon server.js",
     "client": "npm start --prefix ../client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
