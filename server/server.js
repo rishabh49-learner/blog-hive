@@ -4,6 +4,7 @@ const { errorHandler } = require("./middleware/errorMiddleware");
 const connectDB = require("./config/db");
 const cors = require("cors");
 const swaggerDocs = require("./swagger");
+const serverless = require("serverless-http");
 
 const port = process.env.PORT || 5500;
 
@@ -21,16 +22,17 @@ app.use("/api/blogs", require("./routes/blogsRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/upload", require("./routes/imageRoutes"));
 
-// Serve frontend (for full-stack deployment)
-const path = require("path");
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../client/build")));
-
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
-  });
-}
-
+// Error Handling Middleware
 app.use(errorHandler);
 
+// Export for Vercel Serverless Functions
 module.exports = app;
+module.exports.handler = serverless(app);
+
+// Start server (only in local dev)
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    swaggerDocs(app, port);
+    console.log(`Server running on port ${port}`);
+  });
+}
