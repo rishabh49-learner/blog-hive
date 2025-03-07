@@ -8,8 +8,8 @@ const options = {
       description:
         "API endpoints for a bloggify web application documented on swagger",
       contact: {
-        name: "Divyanshu Prasad",
-        url: "https://divyanshuprasad.dev/",
+        name: "Rishabh Raghuwanshi",
+        url: "",
       },
       version: "1.0.0",
     },
